@@ -1,0 +1,6 @@
+<h1>Resúmen de {{newspaper.newspaper_name}}</h1>
+<a href="{% url 'news:index' %}">Volver al índice de diarios</a>
+<hr>
+{% for article in newspaper.article_set.all%}
+    
+{% endfor %}
