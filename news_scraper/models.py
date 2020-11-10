@@ -19,7 +19,7 @@ class Newspaper(models.Model):
 
 class Author(models.Model):
 
-    name = models.CharField(max_length=100,default="")
+    name = models.CharField(max_length=100,default=None)
 
     def __str__(self) -> str:
         return self.name
