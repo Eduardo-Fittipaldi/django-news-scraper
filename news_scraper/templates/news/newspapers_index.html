@@ -1,1 +1,5 @@
-TEST
+<h1>Índice de diarios</h1>
+<hr>
+{% for newspaper in newspaper_list %}
+    <h2><a href={% url 'news:newspaper' forloop.counter%}><strong>{{newspaper.newspaper_name}}</strong></a></h2>
+{% endfor %}

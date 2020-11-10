@@ -15,7 +15,15 @@ class NewspapersIndexView(generic.ListView):
 def newspaper(request, pk):
     template_name="news/newspaper.html"
     newspaper = get_object_or_404(Newspaper,id=pk)
+    all_news = newspaper.article_set.all()
 
+    #Get all sections and the 6 most recent news per section
+    sections = all_news.values("category").distinct()
+    sections = [cat["category"] for cat in sections]
+    filtered_news = dict() 
+    for section in sections:
+        filtered_news[section] = all_news.filter(category=section).order_by('-pub_day','-id')[0:6]
     return render(request,template_name,{
-        'newspaper':newspaper
+        'newspaper':newspaper,
+        'filtered_news':filtered_news
     })
