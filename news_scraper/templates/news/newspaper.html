@@ -1,6 +1,18 @@
 <h1>Resúmen de {{newspaper.newspaper_name}}</h1>
 <a href="{% url 'news:index' %}">Volver al índice de diarios</a>
 <hr>
-{% for article in newspaper.article_set.all%}
-    
+{% for section,articles in filtered_news.items %}
+    <h3><em>{{section}}</em></h3>
+    <ul>
+        {% for article in articles %}
+            <li><p>
+            <a href={{article.link}}><strong>{{article.headline}}</strong></a><br>
+            {% if article.author %}
+            {{article.pub_day}} | Publicado por <strong>{{article.author.name}}</strong>
+            {% else %}
+            {{article.pub_day}}
+            {% endif %}
+            </p></li>
+        {% endfor %}
+    </ul>
 {% endfor %}
